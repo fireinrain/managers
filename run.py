@@ -35,9 +35,11 @@ class User(db.Model):
     """
     用户表
     """
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=True)
+    qq = db.Column(db.String(120), unique=True, nullable=True)
+    weixin = db.Column(db.String(120), unique=True, nullable=True)
 
     def __repr__(self):
         return f'<User {self.id},{self.username},{self.email}>'
@@ -48,9 +50,25 @@ class ShadowConf(db.Model):
     shadowsocks 配置表
     """
     #  主键id
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     # 用户id
     user_id = db.Column(db.Integer, nullable=False)
+    # 端口
+    port = db.Column(db.Integer, nullable=True)
+    # 端口密码
+    password = db.Column(db.String(120), nullable=True)
+    # 流量
+    data_flow = db.Column(db.Integer, nullable=True)
+    # 剩余时间
+    left_time = db.Column(db.Integer, nullable=True)
+    # 订购时间长度
+    total_time = db.Column(db.Integer, nullable=True)
+    # 价格
+    payment = db.Column(db.Integer, nullable=True)
+    # 是否包括手机
+    mobile_flag = db.Column(db.Integer, nullable=True)
+    # 是否停用 该配置
+    ban_flag = db.Column(db.Integer, nullable=True)
 
 
 # 是否初始化数据库
